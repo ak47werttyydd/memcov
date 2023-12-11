@@ -70,31 +70,6 @@ while model in models:
         print("------------deserialize_mem_coverage finish-----------------")
 ```
 
-## **\[C++\]** Add Coverage Tracing During Library Compilation
-
-```cmake
-INCLUDE(FetchContent)
-FetchContent_Declare(
-    memcov
-    GIT_REPOSITORY https://github.com/ganler/memcov.git
-)
-
-FetchContent_GetProperties(memcov)
-
-if(NOT memcov_POPULATED)
-    FetchContent_Populate(memcov)
-    ADD_SUBDIRECTORY(${memcov_SOURCE_DIR} ${memcov_BINARY_DIR})
-endif()
-
-# Allow coverage tracing to specific files!
-set_source_files_properties(
-    ${CMAKE_CURRENT_SOURCE_DIR}/path/to/what.cpp 
-    PROPERTIES COMPILE_OPTIONS
-    -fsanitize-coverage=edge,trace-pc-guard)
-
-# Include it to your target!
-TARGET_LINK_LIBRARIES(YOUR_TARGET PRIVATE memcov)
-```
 
 ## **\[Python\]** Add Interface to Operate/Monitor Coverage
 
